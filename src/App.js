@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import MovementForm from './components.js';
 
 function App() {
   return (
@@ -9,13 +10,11 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+        <MovementForm />
+        <MovementForm />
+        <MovementForm />
+        <a>
+        add new Ship Group
         </a>
       </header>
     </div>
