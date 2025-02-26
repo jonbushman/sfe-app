@@ -40,18 +40,6 @@ public class Floatilla
         AddShip(ship);
     }
 
-    //private bool NameIsUnique(string name)
-    //{
-    //    foreach (Ship s in Ships)
-    //    {
-    //        if (s.Name == name)
-    //        {
-    //            ErrorWindow.ValidationError("Please choose a unique ship name");
-    //            return false;
-    //        }
-    //    }
-    //    return true;
-    //}
     private bool NameIsUnique(string name)
     {
         foreach (Ship s in Ships)

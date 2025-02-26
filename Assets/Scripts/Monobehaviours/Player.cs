@@ -7,8 +7,11 @@ using static DataClasses;
 public class Player : MonoBehaviour
 {
     public Floatilla Floatilla;
+    public List<Colony> Colonies;
     public Dictionary<Location, Ledger> Wallet;
     public ErrorWindow ErrorWindow;
+
+    public int TechLevel;
 
     private void Awake()
     {
