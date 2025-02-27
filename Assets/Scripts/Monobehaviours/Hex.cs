@@ -14,7 +14,9 @@ public class Hex : MonoBehaviour
     public HexType HexType;
     public UnityEvent LeftClicked;
     public UnityEvent RightClicked;
+
     public TMP_Text SegmentLabel;
+    public GameObject Highlighter;
 
     private Map _map;
 
@@ -28,19 +30,27 @@ public class Hex : MonoBehaviour
         if (_map.SelectingHexes == false) return;   
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log(ID);
             LeftClicked?.Invoke();
         }
         else if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("Removing " + ID);
             RightClicked?.Invoke();
         }
     }
-    public void ChangeSegmentLabel(int segment)
+    public void ChangeSegmentLabel(int segment) //this should not be a thing. should spawn in an a new TMP at this same position , but not have it be directly tied to the hex
     {
         SegmentLabel.text = segment.ToString();
-    } 
+    }
+
+    public void HighlightEnable(bool x)
+    {
+        Highlighter.SetActive(x);
+    }
+
+    public void SegmentLabelEnable(bool x)
+    {
+        SegmentLabel.gameObject.SetActive(x);
+    }
 
     public void AddColonizable(Colonizable col)
     {

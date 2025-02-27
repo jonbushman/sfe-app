@@ -56,7 +56,6 @@ public class FleetMovement : MonoBehaviour
                 else HighlightCell(segment, Color.white);
             }
         }
-
     }
 
     private void HighlightCell(int segment, Color color)

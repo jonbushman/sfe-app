@@ -351,6 +351,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   SegmentLabel: {fileID: 5132428969757587331}
+  Highlighter: {fileID: 8594779990153656697}
 --- !u!135 &6046754831806758823
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -39,7 +39,7 @@ public static class ShipDictionary
         JObject o1 = new JObject();
         AllShips = new Dictionary<string, ShipTraits>();
         
-        using (StreamReader file = File.OpenText(Application.dataPath + "/Scripts/ShipData.json"))
+        using (StreamReader file = File.OpenText(Application.dataPath + "/Constants/ShipData.json"))
         using (JsonTextReader reader = new JsonTextReader(file))
         {
             o1 = (JObject)JToken.ReadFrom(reader);

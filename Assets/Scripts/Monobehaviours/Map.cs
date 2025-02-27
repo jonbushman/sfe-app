@@ -1,3 +1,4 @@
+//need to add a on-hover over map ui buttons, disable hex clicking
 
 using Newtonsoft.Json;
 using System;
@@ -97,14 +98,23 @@ public class Map : MonoBehaviour
     }
 
     #region Movement and Orders methods
-    private void onLeftClicked(string id)
+    private void onLeftClicked(string id) 
     {
-        MovementOrders.Add(id);
-        updateMovementLabels();
+        if (MovementOrders.Count <= 6)
+        {
+            MovementOrders.Add(id);
+            updateMovementLabels();
+        }
+
     }
     private void onRightClicked(string id)
     {
-        while(MovementOrders.Contains(id)) MovementOrders.Remove(id);
+        var index = IDTOIndex(id);
+        var hex = _hexList[index[0]][index[1]];
+        hex.HighlightEnable(false);
+        hex.SegmentLabelEnable(false);
+
+        while (MovementOrders.Contains(id)) MovementOrders.Remove(id);
         updateMovementLabels();
     }
 
@@ -114,6 +124,8 @@ public class Map : MonoBehaviour
         {
             var index = IDTOIndex(MovementOrders[i]);
             var hex = _hexList[index[0]][index[1]];
+            hex.HighlightEnable(true);
+            hex.SegmentLabelEnable(true);
             hex.ChangeSegmentLabel(i);
         }
     }
