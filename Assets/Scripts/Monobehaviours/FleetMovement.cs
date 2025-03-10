@@ -88,8 +88,10 @@ public class FleetMovement : MonoBehaviour
     {
         _map.SelectingHexes = true;
         _map.MovementOrders.Clear();
+
         for (var i = 0;i < HexContainers.Count; i++)
         {
+
             //eventually should have error handling for bad hexes, since this is player input. but don't wanna do that rn
             if (HexContainers[i].text != "")
             {

@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        _player.SavePlayerData();
+        //cascading saves
+        _player.Save();
 
         //Application.persistentDataPath
 
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadGame()
     {
-        _player.LoadPlayerData();
+        _player.Load();
 
 
 

@@ -19,7 +19,7 @@ public class Map : MonoBehaviour
     public PrefabDictionary PrefabDictionary;
 
     public List<string> MovementOrders;
-    public FleetMovement CurrentFleetMoving;
+    public FleetMovement CurrentFleetMoving; //this needs to get assigned
     public bool SelectingHexes = false;
 
     private List<List<Hex>> _hexList = new List<List<Hex>>();
@@ -96,7 +96,6 @@ public class Map : MonoBehaviour
             }
         }
     }
-
     #region Movement and Orders methods
     private void onLeftClicked(string id) 
     {
@@ -117,33 +116,35 @@ public class Map : MonoBehaviour
         while (MovementOrders.Contains(id)) MovementOrders.Remove(id);
         updateMovementLabels();
     }
-
     public void updateMovementLabels()
     {
-        for(int i = 0; i < MovementOrders.Count; i++)
+        var startingHexID = CurrentFleetMoving.StartingHex.text;
+        var startingIndex = IDTOIndex(startingHexID);
+        var startingHex = _hexList[startingIndex[0]][startingIndex[1]];
+        startingHex.HighlightEnable(true);
+        startingHex.SegmentLabelEnable(true);
+        startingHex.ChangeSegmentLabel(0);
+        for (int i = 0; i < MovementOrders.Count; i++)
         {
             var index = IDTOIndex(MovementOrders[i]);
             var hex = _hexList[index[0]][index[1]];
             hex.HighlightEnable(true);
             hex.SegmentLabelEnable(true);
-            hex.ChangeSegmentLabel(i);
+            hex.ChangeSegmentLabel(i + 1);
         }
     }
-
     public void ReturnToOrders()
     {
         SelectingHexes = false;
         CurrentFleetMoving.ReturnFromMap();
     }
     #endregion
-
     public int ChooseRandomHexPrefab(HexType type)
     {
         int id = UnityEngine.Random.Range(0, PrefabDictionary[type].list.Count);
 
         return id;
     }
-
     public void ClearMap()
     {
         foreach (Transform child in transform)
@@ -152,7 +153,6 @@ public class Map : MonoBehaviour
         }
         _hexList = new List<List<Hex>>();
     }
-
     public List<HexData> SaveMapData()
     {
         var data = new List<HexData>();
@@ -166,7 +166,6 @@ public class Map : MonoBehaviour
 
         return data;
     }
-
     public List<HexData> LoadMapData()
     {
         var serializer = new JsonSerializer();
@@ -179,8 +178,6 @@ public class Map : MonoBehaviour
         }
         return data;
     }
-
-
     public void TempSaveToFile()
     {
         var data = SaveMapData();
@@ -193,14 +190,12 @@ public class Map : MonoBehaviour
         }
         //Debug.Log(json);
     }
-
     public void SmartSelection()
     {
         //needs to look at neighbors
         //should be recursive
         int recursions = 1;
     }
-
     private string IndexToID(int[] id)
     {
         return (id[0] + 1).ToString("00") + (id[1] + 1).ToString("00");
@@ -209,8 +204,6 @@ public class Map : MonoBehaviour
     {
         return (i + 1).ToString("00") + (j + 1).ToString("00");
     }
-
-
     private int[] IDTOIndex(string id)
     {
         int i = Int32.Parse(id.Substring(0, 2)) - 1;
@@ -222,7 +215,6 @@ public class Map : MonoBehaviour
 
         return idArray;
     }
-
     public List<string> GetAdjacentHexes(string hexID)
     {
         var x = int.Parse(hexID.Substring(0, 2));
@@ -335,7 +327,6 @@ public class Map : MonoBehaviour
 
         return adjacentHexes;
     }
-
     private string ToTwoDigits(int num)
     {
         if (num < 10)
@@ -347,7 +338,6 @@ public class Map : MonoBehaviour
             return num.ToString();
         }
     }
-
     public void HexMovementSelection()
     {
         

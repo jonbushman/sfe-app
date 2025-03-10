@@ -19,9 +19,9 @@ public class Player : MonoBehaviour
     }
 
 
-    public void SavePlayerData()
+    public void Save()
     {
-        //PlayerData data = new PlayerData();
+        PlayerData data = new PlayerData();
         //data.Floatilla = Floatilla;
         //data.Wallet = Wallet;
 
@@ -32,13 +32,13 @@ public class Player : MonoBehaviour
 
 
         // hex is a part of location, but is not serializable. what to do
-
+        // those hexes are garbo. need to re-do it all anyways
 
 
 
 
     }
-    public void LoadPlayerData()
+    public void Load()
     {
 
         Floatilla.Ships = JsonConvert.DeserializeObject<List<Ship>>(System.IO.File.ReadAllText(Application.persistentDataPath + "/Floatilla.json"));
@@ -46,6 +46,4 @@ public class Player : MonoBehaviour
         var fleetViewer = FindObjectOfType<FleetViewer>();
         fleetViewer.UpdateFleetView();
     }
-
-
 }
